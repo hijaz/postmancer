@@ -1,0 +1,51 @@
+{
+  "name": "postmancer",
+  "version": "0.1.0",
+  "description": "Standalone MCP server for REST API testing and management",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "postmancer": "dist/src/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "postbuild": "node -e \"try { require('fs').chmodSync('./dist/src/index.js', '755'); } catch (e) { console.log('Skipping chmod on Windows'); }\"",
+    "prepare": "npm run build",
+    "watch": "tsc --watch",
+    "lint": "eslint . --ext .ts",
+    "start": "node dist/src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/username/postmancer.git"
+  },
+  "keywords": [
+    "mcp",
+    "api",
+    "rest",
+    "postman",
+    "insomnia",
+    "claude",
+    "ai",
+    "assistant"
+  ],
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "axios": "^1.5.0",
+    "fs-extra": "^11.1.1",
+    "nanoid": "^4.0.2",
+    "zod": "^3.22.2",
+    "zod-to-json-schema": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.2",
+    "@types/node": "^20.8.2",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0",
+    "typescript": "^5.2.2"
+  }
+}
