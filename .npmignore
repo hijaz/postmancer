@@ -1,7 +1,6 @@
-# Source code
+# Source code (TypeScript files)
 src/
 tests/
-examples/
 
 # Development config files
 .eslintrc.js
@@ -25,8 +24,9 @@ Dockerfile
 .gitlab-ci.yml
 .github/workflows/
 
-# Documentation
+# Documentation (except README)
 docs/
+CONTRIBUTING.md
 *.md
 !README.md
 !LICENSE.md
@@ -42,3 +42,6 @@ yarn-debug.log*
 yarn-error.log*
 .npm
 .DS_Store
+
+# Examples directory (not needed in package)
+examples/
