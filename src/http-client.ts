@@ -18,44 +18,6 @@ const DEFAULT_TIMEOUT = 30000;
 const MAX_REQUEST_SIZE = 10 * 1024 * 1024; // 10MB
 
 /**
- * Check if a URL is allowed (not pointing to internal networks)
- */
-export function isAllowedUrl(url: string): boolean {
-  try {
-    const parsedUrl = new URL(url);
-    
-    // Block localhost and private network IP ranges
-    const hostname = parsedUrl.hostname.toLowerCase();
-    
-    // Check for localhost variations
-    if (hostname === 'localhost' || hostname === '[::1]') {
-      return false;
-    }
-    
-    // Check for private IP ranges
-    if (hostname.match(/^127\.\d+\.\d+\.\d+$/) ||     // 127.0.0.0/8
-        hostname.match(/^10\.\d+\.\d+\.\d+$/) ||      // 10.0.0.0/8
-        hostname.match(/^172\.(1[6-9]|2\d|3[0-1])\.\d+\.\d+$/) || // 172.16.0.0/12
-        hostname.match(/^192\.168\.\d+\.\d+$/) ||     // 192.168.0.0/16
-        hostname.match(/^169\.254\.\d+\.\d+$/)) {     // 169.254.0.0/16
-      return false;
-    }
-
-    // Check for environment-based exceptions (for development/testing)
-    const allowInternalNetworks = process.env.ALLOW_INTERNAL_NETWORKS === 'true';
-    if (allowInternalNetworks) {
-      logger.warn(`Request to internal network ${url} allowed because ALLOW_INTERNAL_NETWORKS=true`);
-      return true;
-    }
-    
-    return true;
-  } catch (error) {
-    logger.error(`Failed to validate URL: ${url}`, error);
-    return false;
-  }
-}
-
-/**
  * Apply authentication to the request config
  */
 export async function applyAuthentication(
@@ -320,10 +282,6 @@ export async function makeRequest(
   
   // Validate URL for security
   const { url, method, headers = {}, body, query_params, auth, timeout = DEFAULT_TIMEOUT } = validatedRequest;
-  
-  if (!isAllowedUrl(url)) {
-    throw new SecurityError(`URL not allowed: ${url}`);
-  }
   
   // Build Axios request config
   let config: AxiosRequestConfig = {
