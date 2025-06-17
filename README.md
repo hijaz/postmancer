@@ -1,3 +1,5 @@
+[![MseeP.ai Security Assessment Badge](https://mseep.net/pr/hijaz-postmancer-badge.png)](https://mseep.ai/app/hijaz-postmancer)
+
 # Postmancer
 
 ![Postmancer](postmancer.jpg)
