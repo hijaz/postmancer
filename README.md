@@ -1,4 +1,5 @@
 # Postmancer
+[![Trust Score](https://archestra.ai/mcp-catalog/api/badge/quality/hijaz/postmancer)](https://archestra.ai/mcp-catalog/hijaz__postmancer)
 
 ![Postmancer](postmancer.jpg)
 
